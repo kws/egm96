@@ -1,7 +1,5 @@
-var fs = require('fs');
-var path = require('path');
-
-var data = fs.readFileSync(path.join(__dirname,'/WW15MGH.DAC'));
+const bops = require('bops');
+const data = require('./WW15MGH');
 
 function toDegree(radians) {
   return radians * (180 / Math.PI);
@@ -18,7 +16,7 @@ function getPostOffset(row, col) {
     throw new RangeError('Offset exceeds height measurements');
   }
 
-  return data.readInt16BE(k * 2);
+  return bops.readInt16BE(data, k * 2);
 }
 
 var INTERVAL = fromDegree(15/60),
